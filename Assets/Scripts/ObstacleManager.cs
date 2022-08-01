@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObstacleManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> obstacles;
+    [SerializeField] private GameObject nullObstacle;
     
     private List<int> _pickedObstacles;
     
@@ -24,8 +25,10 @@ public class ObstacleManager : MonoBehaviour
         }
     }
     
-    public GameObject GetRandomObstacle()
+    public GameObject GetRandomObstacle(GameObject road)
     {
+        if (road.CompareTag("RestArea")) return nullObstacle;
+
         var count = obstacles.Count;
         int idx;
         while (true) 

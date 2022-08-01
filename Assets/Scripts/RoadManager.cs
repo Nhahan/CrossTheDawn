@@ -6,8 +6,11 @@ public class RoadManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> roads;
     
+    private GameObject _road;
     private List<int> _pickedRoads;
     
+    private const float RoadInterval = 1.03f;
+
     public static RoadManager I;
     
     private void Awake()
@@ -24,7 +27,18 @@ public class RoadManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    private void Start()
+    {
+        var i = 0;
+        while (i < 10)
+        {
+            _road = GetRandomRoad();
+            var nextPos = transform.position + new Vector3(0, RoadInterval * GameManager.I.roadCounts, 0);
+            Instantiate(_road, nextPos, Quaternion.identity);
+            i++;
+        }
+    }
+    
     public GameObject GetRandomRoad()
     {
         var count = roads.Count;

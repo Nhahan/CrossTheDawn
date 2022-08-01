@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public bool gameOver;
+    public int roadCounts = 1;
     
     public static GameManager I;
     
