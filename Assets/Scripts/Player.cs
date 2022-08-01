@@ -25,4 +25,9 @@ public class Player : MonoBehaviour
     {
         
     }
+
+    private void GetNextRoad()
+    {
+        
+    }
 }

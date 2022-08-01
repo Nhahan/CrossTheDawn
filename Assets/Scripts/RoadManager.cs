@@ -7,9 +7,9 @@ public class RoadManager : MonoBehaviour
     [SerializeField] private List<GameObject> roads;
     
     private GameObject _road;
-    private List<int> _pickedRoads;
+    private List<int> _pickedRoads = new();
     
-    private const float RoadInterval = 1.03f;
+    private const float RoadInterval = 1.02f;
 
     public static RoadManager I;
     
@@ -27,19 +27,19 @@ public class RoadManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void InitRoads()
     {
         var i = 0;
         while (i < 10)
         {
             _road = GetRandomRoad();
-            var nextPos = transform.position + new Vector3(0, RoadInterval * GameManager.I.roadCounts, 0);
+            var nextPos = transform.position + new Vector3(0, RoadInterval * GameManager.I.GetAndSetRoadCounts(), 0);
             Instantiate(_road, nextPos, Quaternion.identity);
             i++;
         }
     }
     
-    public GameObject GetRandomRoad()
+    private GameObject GetRandomRoad()
     {
         var count = roads.Count;
         int idx;
@@ -53,7 +53,6 @@ public class RoadManager : MonoBehaviour
         if (_pickedRoads.Count > count / 1.5)
         {
             _pickedRoads.Clear();
-            Debug.Log("_pickedRoads.Clear() / count : " + _pickedRoads.Count);
         }
         return roads[idx];
     }

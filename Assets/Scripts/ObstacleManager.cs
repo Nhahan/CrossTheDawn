@@ -5,9 +5,8 @@ using UnityEngine;
 public class ObstacleManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> obstacles;
-    [SerializeField] private GameObject nullObstacle;
     
-    private List<int> _pickedObstacles;
+    private List<int> _pickedObstacles = new();
     
     public static ObstacleManager I;
     
@@ -25,10 +24,8 @@ public class ObstacleManager : MonoBehaviour
         }
     }
     
-    public GameObject GetRandomObstacle(GameObject road)
+    public GameObject GetRandomObstacle()
     {
-        if (road.CompareTag("RestArea")) return nullObstacle;
-
         var count = obstacles.Count;
         int idx;
         while (true) 
@@ -41,7 +38,7 @@ public class ObstacleManager : MonoBehaviour
         if (_pickedObstacles.Count > count / 1.5)
         {
             _pickedObstacles.Clear();
-            Debug.Log("_pickedObstacles.Clear() / count : " + _pickedObstacles.Count);
+            Debug.Log("_pickedObstacles.Clear() / count: " + _pickedObstacles.Count);
         }
         return obstacles[idx];
     }

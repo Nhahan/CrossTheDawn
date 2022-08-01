@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public bool gameOver;
-    public int roadCounts = 1;
+    private int _roadCounts;
     
     public static GameManager I;
     
@@ -23,8 +23,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Start()
     {
-        
+        RoadManager.I.InitRoads();
+    }
+
+    public int GetAndSetRoadCounts()
+    {
+        Debug.Log("RoadCounts: " + _roadCounts);
+        return ++_roadCounts;
     }
 }
