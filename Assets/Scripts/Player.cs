@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public static Player I;
+
+    public float jumpInterval;
     
     private void Awake()
     {
@@ -18,16 +21,5 @@ public class Player : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void GetNextRoad()
-    {
-        
     }
 }

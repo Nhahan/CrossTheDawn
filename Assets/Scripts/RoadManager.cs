@@ -1,15 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RoadManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> roads;
+    [SerializeField] private List<GameObject> roadPresets;
+    [SerializeField] private List<GameObject> _generatedRoads = new();
     
-    private GameObject _road;
     private List<int> _pickedRoads = new();
-    
-    private const float RoadInterval = 1.02f;
 
     public static RoadManager I;
     
@@ -32,16 +33,25 @@ public class RoadManager : MonoBehaviour
         var i = 0;
         while (i < 10)
         {
-            _road = GetRandomRoad();
-            var nextPos = transform.position + new Vector3(0, RoadInterval * GameManager.I.GetAndSetRoadCounts(), 0);
-            Instantiate(_road, nextPos, Quaternion.identity);
+            Instantiate(GetRandomRoad(), GetNextPos(), Quaternion.identity);
             i++;
         }
+    }
+
+    private Vector3 GetNextPos()
+    {
+        const float a = GameManager.RoadInterval;
+        var sin15 = Mathf.Sin(((float)Math.PI / 180) * 15);
+        var cos15 = Mathf.Cos(((float)Math.PI / 180) * 15);
+        var x = a * sin15 * cos15;
+        var y = a * cos15 * cos15;
+        Debug.Log("x, y:" + x + ", " + y );
+        return transform.position + new Vector3(x , y , 0) * GameManager.I.GetAndSetRoadCounts();
     }
     
     private GameObject GetRandomRoad()
     {
-        var count = roads.Count;
+        var count = roadPresets.Count;
         int idx;
         while (true) 
         {
@@ -54,6 +64,10 @@ public class RoadManager : MonoBehaviour
         {
             _pickedRoads.Clear();
         }
-        return roads[idx];
+
+        var road = roadPresets[idx];
+
+        _generatedRoads.Add(road);
+        return road;
     }
 }

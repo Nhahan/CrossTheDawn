@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public bool gameOver;
     private int _roadCounts;
     
+    public const float RoadInterval = 1.02f;
     public static GameManager I;
     
     private void Awake()
