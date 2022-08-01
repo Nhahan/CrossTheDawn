@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static Player I;
+    
+    private void Awake()
     {
-        
+        Application.targetFrameRate = 60;
+
+        if (I == null)
+        {
+            I = this;
+        } 
+        else if (I != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame

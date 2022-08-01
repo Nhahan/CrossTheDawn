@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Road : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> roads;
-    [SerializeField] private List<GameObject> obstacles;
     [SerializeField] private GameObject rightEnd;
     [SerializeField] private GameObject leftEnd;
     
